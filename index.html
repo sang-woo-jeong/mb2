@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Roses</title>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700,900" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="./css/nav.css" rel="stylesheet">
+    <link href="./css/footer.css" rel="stylesheet">
+    <link href="./css/header.css" rel="stylesheet">
+    <style media="screen">
+      * {margin:0; padding:0; font-family: 'Noto Sans KR', sans-serif;}
+      body {width:600vw; overflow: hidden;}
+      span {display: block;}
+      button:focus {outline:0;}
+      section {width:100vw; height:100vh; float:left; position:relative; overflow: hidden;}
+      section .circle {width:15vw; height:15vw; z-index: 98; cursor: pointer;
+                       position: absolute; right:0; top:50%;
+                       transform:translate(50%,-50%); border-radius: 50%;
+                       box-shadow: 0 0 10px #353535;}
+      section .circle i {color:white; font-size: 5vw; margin-left: 30%; line-height: 300%; pointer-events: none;}
+      section button {padding: .5vw; font-size: 1vw;
+                      background: none; color:white;
+                      border:.15vw solid white; cursor: pointer;
+                      border-radius: 5%; opacity: 0;}
+      section button:hover {background: white;}
+      section .solid {width:inherit; height: inherit;
+                      position: absolute; top:0; left:0;
+                       }
+
+      section img {position:absolute; top:0; right:0; z-index: 0; width:50vw; opacity: 1;}
+      section .contain {position: relative; left:0; top:0;
+                         width:50vw; height:100vh;}
+      section .contain .textwrap {position: absolute; top:50%; left:12%;
+                                  transform: translate(0%,-50%);
+                                  color:white;}
+      section .contain .textwrap h2 {font-size: 5vw; font-weight: 900; overflow: hidden;}
+      section .contain .textwrap h2 span {position: relative; top:400px; display: block;}
+      section .contain .textwrap h3 {font-size: 2vw; width:0; height:0; border-top:2px solid white; overflow:hidden;}
+      section .contain .textwrap h3 span {position:relative; top:-400px; display: block;}
+      section .contain .textwrap h5 {font-size: 1vw; letter-spacing: .5vw; opacity: 0;}
+      section .wrap {width:100%; height: 0vh; position: relative;}
+      .sec1 {background: #d11e24; z-index: 51;}
+      .sec1 button:hover {color:#d11e24;}
+      .sec1 .circle {background: #d13c1e;}
+      .sec1 .solid {background: url("./img/petal3.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+      .innerPage * {pointer-events: none;}
+      .innerPage img{position: absolute; width:35vw; }
+      .innerPage .ci {border-radius:50% 0;
+                      left:55%; top:50%; opacity: 0;
+                      transform:translate(-50%,-50%);}
+      .innerPage .fl {position: absolute; top:50%; left:6%; width:0vw;
+                      transform: translate(0%,-50%); opacity: .5;}
+      .innerPage .sl {position: absolute; top:50%; left:70%; height:0vh;
+                      transform: translate(0%,-50%); opacity: .5;}
+      .innerPage .textwrap {width:23%; color:#353535; opacity: 0;
+                            position: absolute; top:50%; right:7%;
+                            transform: translate(0,-50%);}
+      .innerPage .textwrap h2 {font-size: 1.5vw; font-weight: 400; margin: 1vw 0; }
+      .innerPage .textwrap h4 {font-size: 1.1vw; font-weight: 400; line-height: 170%; opacity: .8; color:#353535;}
+      .innerPage .textwrap h5 {font-size: .7vw; font-weight: 400; letter-spacing: .5vw; color:green;}
+      .innerPage .textwrap p {font-size: 1.1vw; font-weight: 300; line-height: 170%; opacity: .8;}
+      .sec2 {background: #d13c1e;}
+      .sec2 button:hover {color:#d13c1e;}
+      .sec2 .circle {background: #ffde28;}
+      .sec2 .solid {background: url("./img/petal4.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+      .sec3 {background: #ffde28;}
+      .sec3 button {color:#353535;}
+      .sec3 button:hover {color:#ffde28; background: #353535;}
+      .sec3 .circle {background: #ff4cd9;}
+      .sec3 .solid {background: url("./img/petal6.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+      .sec4 {background: #ff4cd9;}
+      .sec4 button:hover {color:#ff4cd9;}
+      .sec4 .circle {background: #b628ff;}
+      .sec4 .solid {background: url("./img/petal5.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+      .sec5 {background: #b628ff;}
+      .sec5 button:hover {color:#b628ff;}
+      .sec5 .circle {background: #286aff;}
+      .sec5 .solid {background: url("./img/petal7.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+      .sec6 {background: #286aff;}
+      .sec6 button:hover {color:#286aff;}
+      .sec6 .solid {background: url("./img/petal8.png") no-repeat 50% 50%;
+                    background-attachment: fixed; background-size: cover;}
+
+
+    </style>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.4.js"></script>
+    <script type="text/javascript">
+      <!--
+        window.onload = function(){
+          setTimeout(function(){
+            scrollTo(0,0);
+          },100)
+        }
+        $(document).ready(function(){
+          var hh = $("header").height();
+          var hw = $("header").width();
+          var i = 0;
+
+          $("button").on("click",function(){
+            $("html").stop().animate({scrollTop:2*hh});
+            $("footer").css({"color":"#353535"});
+            $("nav").css({"color":"#353535"});
+            $(".fl").animate({"width":"22vw"},1000);
+            $(".sl").animate({"height":"27vh"},1000);
+            $(".ci").animate({"left":"50%","opacity":1},800);
+            $(".it").delay(500).animate({"right":"6%","opacity":1},1000);
+          })
+
+          function n(num,wit){
+            if(i==num){
+              $(`.sec${num} h3`).delay(200).animate({"width":`${wit}vw`},function(){
+                $(`.sec${num} h3 span`).animate({"top":"0"});
+              });
+              $(`.sec${num} h3`).delay(100).animate({"height":"11vh"});
+              $(`.sec${num} h2 span`).delay(400).animate({"top":"0"});
+              $(`.sec${num} h5`).delay(400).animate({"opacity":1});
+              $(`.sec${num} button`).delay(400).animate({"opacity":1});
+            }
+          };
+
+          function bt(num){
+            $("button").on("click",function(e){
+              if(e.target == $("button").eq(num)[0]){
+                $(".wrap").eq(num).css({"height":"100vh"});
+                $("html").animate({scrollTop:hh*2});
+              }
+            })
+          }
+
+          for(var h=0;h<6;h++){
+            bt(h);
+          }
+
+          $(window).on("mousewheel click",function(e){
+            for(var p=0;p<6;p++){
+              if(e.type=="mousewheel"&&e.target==$(".innerPage")[p]){
+                if($("html,body").is(":animated")){
+                  return;
+                }else{
+                  $("html").animate({scrollTop:hh});
+                  $("footer").css({"color":"white"});
+                  $("nav").css({"color":"white"});
+                  $(".fl").animate({"width":"0vw"});
+                  $(".ci").animate({"left":"55%","opacity":0},100);
+                  $(".it").animate({"right":"7%","opacity":0},100);
+                  $(".sl").animate({"height":"0vh"},100);
+                }
+
+              }
+            }
+
+            var ar = [20,20,17.5,26,24.7,21.65];
+            var delta = e.originalEvent.deltaY;
+
+            if(e.type=="click" && e.target == $(".circle")[0]){
+              i=1;
+              $("html").stop().animate({scrollTop:hh});
+              $(`.sec1 h3`).delay(200).animate({"width":`20vw`},function(){
+                $(`.sec1 h3 span`).animate({"top":"0"});
+              });
+              $(`.sec1 h3`).delay(100).animate({"height":"11vh"});
+              $(`.sec1 h2 span`).delay(400).animate({"top":"0"});
+              $(`.sec1 h5`).delay(400).animate({"opacity":1});
+              $(`.sec1 button`).delay(400).animate({"opacity":1});
+            }
+
+            function m(b,wit){
+              if(e.type=="click" && e.target == $(".circle")[b]){
+                i=b+1;
+                $("html").stop().animate({scrollLeft:b*hw});
+                $(`.sec${i} h3`).delay(200).animate({"width":`${wit}vw`},function(){
+                  $(`.sec${i} h3 span`).animate({"top":"0"});
+                });
+                $(`.sec${i} h3`).delay(100).animate({"height":"11vh"});
+                $(`.sec${i} h2 span`).delay(400).animate({"top":"0"});
+                $(`.sec${i} h5`).delay(400).animate({"opacity":1});
+                $(`.sec${i} button`).delay(400).animate({"opacity":1});
+              }
+            }
+            for(var u = 1;u<6;u++){
+              m(u,ar[u]);
+            }
+
+            if(delta>0){
+              if($("html,body").is(":animated")){
+                return;
+              }else{
+                i++;
+                if(i>6) i=6;
+                if(i==1){
+                  $("html").stop().animate({scrollTop:hh});
+                }
+                if(i>1){
+                  $("html").stop().animate({scrollLeft:hw*(i-1)});
+                }
+                for(var o=1;o<7;o++){
+                  n(o,ar[o-1]);
+                };
+
+              }
+            }else if(delta<0){
+              if($("html,body").is(":animated")){
+                return;
+              }else{
+                i--;
+                if(i<0)i=0;
+                if(i<6){
+                  $("html").stop().animate({scrollLeft:hw*(i-1)});
+                }if(i==6){
+                  $("html").stop().animate({scrollTop:hh});
+                  $("footer").css({"color":"white"});
+                  $("nav").css({"color":"white"});
+                }
+                if(i==0){
+                  $("html").stop().animate({scrollTop:0});
+                  $("h3").css({"width":"0"});
+                  $("h3").css({"height":"0"});
+                  $("h2 span").animate({"top":"200"},1);
+                  $("h3 span").css({"top":"200"});
+                  $("section h5").css({"opacity":0});
+                  $("section button").css({"opacity":0});
+                }
+              }
+            }
+          })
+        })
+      //-->
+    </script>
+  </head>
+  <body>
+    <nav>
+      <i class="fa fa-bars">&nbsp;&nbsp;&nbsp;NAVIGATION</i>
+      <div class="logo">ROSES</div>
+    </nav>
+    <header>
+      <h1>BEAUTIFUL MEANING OF THE ROSES</h1>
+      <div class="circle">
+        <i class="fa fa-angle-double-down arrow"></i>
+      </div>
+    </header>
+    <section class="sec1">
+      <div class="circle">
+        <i class="fa fa-angle-double-right arrow"></i>
+      </div>
+      <div class="solid"></div>
+        <div class="contain">
+          <div class="textwrap">
+            <h5>#01</h5>
+            <h2><span>Red</span></h2>
+            <h3><span>Love and Romance</span></h3>
+            <button>See Detaild Red</button>
+          </div>
+        </div>
+    </section>
+    <section class="sec2">
+      <div class="circle">
+        <i class="fa fa-angle-double-right arrow"></i>
+      </div>
+      <div class="solid"></div>
+      <div class="contain">
+        <div class="textwrap">
+          <h5>#02</h5>
+          <h2><span>Orange</span></h2>
+          <h3><span>"I am proud of you"</span></h3>
+          <button>See Detaild Orange</button>
+        </div>
+      </div>
+    </section>
+    <section class="sec3">
+      <div class="circle">
+        <i class="fa fa-angle-double-right arrow"></i>
+      </div>
+      <div class="solid"></div>
+      <div class="contain">
+        <div class="textwrap" style="color:#353535;">
+          <h5>#03</h5>
+          <h2><span>Yellow</span></h2>
+          <h3 style="border-top:2px solid #353535"></span>Joyful Friendship<span></h3>
+          <button style="border:.15vw solid #353535;">See Detaild Meaning</button>
+        </div>
+      </div>
+    </section>
+    <section class="sec4">
+      <div class="circle">
+        <i class="fa fa-angle-double-right arrow"></i>
+      </div>
+      <div class="solid"></div>
+      <div class="contain">
+        <div class="textwrap">
+          <h5>#04</h5>
+          <h2><span>Pink</span></h2>
+          <h3><span>Happiness & Appreciation</span></h3>
+          <button>See Detaild Meaning</button>
+        </div>
+      </div>
+    </section>
+    <section class="sec5">
+      <div class="circle">
+        <i class="fa fa-angle-double-right arrow"></i>
+      </div>
+      <div class="solid"></div>
+      <div class="contain">
+        <div class="textwrap">
+          <h5>#05</h5>
+          <h2><span>Purple</span></h2>
+          <h3><span>Falling Love at first Sight</span></h3>
+          <button>See Detaild Meaning</button>
+        </div>
+      </div>
+    </section>
+    <section class="sec6">
+      <div class="solid"></div>
+      <div class="contain">
+        <div class="textwrap">
+          <h5>#06</h5>
+          <h2><span>Blue</span></h2>
+          <h3><span>Imposible and Miracle</span></h3>
+          <button>See Detaild Meaning</button>
+        </div>
+      </div>
+
+    </section>
+    <section class="sec1-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose1.jpg"/>
+      <div class="textwrap it">
+        <h5>#01-1</h5>
+        <h2>빨강[赤]</h2>
+        <h4>욕망적인 사랑</h4>
+        <p>
+          빨간 장미는 깊은 감정을 전달하며, 뚜렷한 사랑의 표현입니다.
+          사랑,갈망,열정을 의미하며 존경 또는 헌신을 전달할 때 사용되기도 합니다.
+        </p>
+      </div>
+    </section>
+    <section class="sec2-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose2.jpg"/>
+      <div class="textwrap it">
+        <h5>#02-1</h5>
+        <h2>주황[朱黃]</h2>
+        <h4>열정적인 사랑</h4>
+        <p>
+          주황 장미는 빨강의 사랑과 노랑의 우정, 중간적인 느낌을 발산합니다.
+          매혹적인 의미로도 의미를 전달하고 "당신이 자랑스럽습니다."의 의미도 가집니다.
+        </p>
+      </div>
+    </section>
+    <section class="sec3-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose3.jpg"/>
+      <div class="textwrap it">
+        <h5>#03-1</h5>
+        <h2>노랑[黃]</h2>
+        <h4>즐거운 사랑</h4>
+        <p>
+          노란 장미는 풍부함을 표현하며 기쁨, 따뜻함과 같은 밝은 감정을 일으킵니다.
+          우정과 보살핌의 사징을 지니고 있으며 플라토닉적 감정을 나타냅니다.
+        </p>
+      </div>
+    </section>
+    <section class="sec4-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose4.jpg"/>
+      <div class="textwrap it">
+        <h5>#04-1</h5>
+        <h2>분홍[粉紅]</h2>
+        <h4>행복한 사랑</h4>
+        <p>
+          분홍 장미는 감탄, 기쁨, 감사와 같은 부드러운 감정을 전달하는 데 사용이 됩니다.
+          연분홍색 장미는 달콤함과 순수를 나타내며, 진분홍 장미는 깊은 감사를 의미합니다.
+
+        </p>
+      </div>
+    </div>
+    </section>
+    <section class="sec5-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose5.jpg"/>
+      <div class="textwrap it">
+        <h5>#05-1</h5>
+        <h2>보라[藍]</h2>
+        <h4>매혹적인 사랑</h4>
+        <p>
+          보라색 장미는 보이는 색깔처럼 매혹적인 감정을 전달합니다. 또한 "첫눈에 반한 사랑"을
+          의미합니다. 진보라색 장미는 위엄을 불러 일으키는 느낌을 가지고 있습니다.
+        </p>
+      </div>
+    </div>
+    </section>
+    <section class="sec6-1 innerPage">
+      <svg class="fl" height="210" width="500">
+        <line x1="0" y1="100" x2="500" y2="100" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <svg class="sl" height="210" width="1">
+        <line x1="0" y1="0" x2="0" y2="500" style="stroke:rgb(0,0,0);stroke-width:1" />
+      </svg>
+      <img class="ci" src="./img/rose6.jpg"/>
+      <div class="textwrap it">
+        <h5>#06-1</h5>
+        <h2>파랑[藍]</h2>
+        <h4>신비로운 사랑</h4>
+        <p>
+          푸른 장미는 신비로운 감정을 전달합니다. 자연에서는 나올 수 없는 색이기 때문에, 불가능을
+          의미하며, 때로는 기적을 의미하기도 합니다.
+        </p>
+      </div>
+    </section>
+    <section class="sec7">
+    </section>
+    <footer>
+      <h5 class="copyright"><i class="fa">COPYRIGHT 2018 ⓒ Made by Sang</i></h5>
+      <h4><i class="fa">beautiful meaning of the roses</i></h4>
+    </footer>
+  </body>
+</html>
